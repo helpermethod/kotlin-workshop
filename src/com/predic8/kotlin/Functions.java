@@ -1,4 +1,4 @@
-package com.predic8;
+package com.predic8.kotlin;
 
 /**
  * @author Oliver Weiler (weiler@predic8.de)

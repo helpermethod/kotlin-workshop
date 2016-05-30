@@ -1,4 +1,4 @@
-package com.predic8
+package com.predic8.kotlin
 
 /**
  * @author Oliver Weiler (weiler@predic8.de)
@@ -31,22 +31,41 @@ fun sub(x: Int, y: Int) = x - y
 
 // functions with block body must specify a return type unless returning `Unit`
 
-// 5. Varargs
+// 5. Varargs and spread operator
 
-fun concat(vararg parts: String) = parts.joinToString(separator = "")
+fun concat(vararg strings: String) = strings.joinToString(separator = "")
+
+// 6. Local functions
+fun fac(n: Int): Int {
+    if (n < 0)
+        throw IllegalArgumentException()
+
+    fun fac(n: Int): Int = when(n) {
+        0 -> 1
+        else -> n * fac(n - 1)
+    }
+
+    return fac(n)
+}
 
 val sum = add(1, 2)
 
 fun main(args: Array<String>) {
     greet()
-    println(sum)
+    println("sum: $sum")
 
     val s = "Kotlin rocks";
 
-    println(slice(s, 0, 6))
-    println(slice(s, 7))
+    println("slice: ${slice(s, 0, 6)}")
+    println("slice with default begin: ${slice(s, 7)}")
     // end is a named parameter
-    println(slice(s, end = 6))
+    println("slice with default end: ${slice(s, end = 6)}")
 
-    println(concat("Kot", "lin"))
+    println("sub: ${sub(4, 3)}")
+
+    println("concat: ${concat("Kot", "lin")}")
+    val nums = arrayOf("4", "5", "6")
+    println("concat with spread: ${concat("1", "2", "3", *nums)}") // spread operator (*)
+
+    println(fac(5000))
 }
